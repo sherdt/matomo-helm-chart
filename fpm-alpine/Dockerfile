@@ -1,6 +1,6 @@
-FROM php:7.1-fpm-alpine
+FROM php:7.2-fpm-alpine
 
-LABEL maintainer="pierre@piwik.org"
+LABEL maintainer="matomo@exploit.cz"
 
 RUN set -ex; \
 	\
@@ -30,7 +30,7 @@ RUN set -ex; \
 # pecl will claim success even if one install fails, so we need to perform each install separately
 	pecl install APCu-5.1.12; \
 	pecl install geoip-1.1.1; \
-	pecl install redis-3.1.6; \
+	pecl install redis-4.1.1; \
 	\
 	docker-php-ext-enable \
 		apcu \
