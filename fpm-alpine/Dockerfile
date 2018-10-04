@@ -73,6 +73,14 @@ RUN set -ex; \
 	curl -fsSL -o /usr/src/piwik/misc/GeoIPCity.dat.gz https://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz; \
 	gunzip /usr/src/piwik/misc/GeoIPCity.dat.gz
 
+ENV QUEUEDTRACKING_VERSION 3.3.1
+
+RUN set -ex; \
+	curl -fsSL -o QueuedTracking.tar.gz https://github.com/matomo-org/plugin-QueuedTracking/archive/${QUEUEDTRACKING_VERSION}.tar.gz; \
+	mkdir -p /usr/src/piwik/plugins/QueuedTracking; \ 
+	tar -xzf QueuedTracking.tar.gz --strip 1 -C /usr/src/piwik/plugins/QueuedTracking/; \
+	rm QueuedTracking.tar.gz;
+
 COPY docker-entrypoint.sh /entrypoint.sh
 
 # WORKDIR is /var/www/html (inherited via "FROM php")
